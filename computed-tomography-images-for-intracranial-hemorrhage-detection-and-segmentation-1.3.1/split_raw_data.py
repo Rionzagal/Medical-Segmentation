@@ -6,7 +6,9 @@ import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from scipy.misc import imread, imresize, imsave
+import cv2
+from scipy.misc import imsave
+#from scipy.misc import imread, imresize, imsave
 import nibabel as nib
 import matplotlib.pyplot as plt
 
@@ -67,11 +69,11 @@ for sNo in range(0+49, numSubj+49):
 
         for sliceI in range(0, sliceNos.size):
             # Saving the a given CT slice
-            x = imresize(ct_scan[:,:,sliceI], new_size)
+            x = cv2.resize(ct_scan[:,:,sliceI], new_size)
             imsave(image_path / (str(counterI) + '.png'), x)
 
             # Saving the segmentation for a given slice
             segment_path = Path(masks_dir_subj,str(sliceNos[sliceI]) + '_HGE_Seg.jpg')
-            x = imresize(masks[:,:,sliceI], new_size)
+            x = cv2.resize(masks[:,:,sliceI], new_size)
             imsave(label_path / (str(counterI) + '.png'), x)
             counterI = counterI+1
