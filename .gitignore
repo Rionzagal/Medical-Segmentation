@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Unmovable data
-Data/ATLAS_2/
+Data/**
