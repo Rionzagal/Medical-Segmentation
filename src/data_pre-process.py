@@ -36,12 +36,13 @@ for n, file in enumerate(image_files):
     print(f"Image ({n}/{N}) added to the training set: {file}")
 # Generate an array based on the retrieved data and update the .npy file containing the images.
 res_images = array(res_images)
-if path_exists("image_data.npy"):
-    existent_image_data = load("image_data.npy").tolist()
+image_path = r"Data\image_data.npy"
+if path_exists(image_path):
+    existent_image_data = load(image_path).tolist()
     existent_image_data += res_images
-    save("image_data.npy", array(existent_image_data))
+    save(image_path, array(existent_image_data))
 else:
-    save("image_data.npy", array(res_images))
+    save(image_path, array(res_images))
 
 # Filter the mask file images and process them for generating a binary volume (M x N x K).
 mask_files = list(filter(lambda file: "_mask" in file), files)
@@ -59,12 +60,13 @@ for n, file in enumerate(mask_files):
     print(f"Mask added to the training set: {file}")
 # Generate an array based on the retrieved data and update the .npy file containing the masks.
 res_masks = array(res_masks, dtype="uint8")
-if path_exists("mask_data.npy"):
-    existent_mask_data = load("mask_data.npy").tolist()
+mask_path = r"Data\mask_data.npy"
+if path_exists(mask_path):
+    existent_mask_data = load(mask_path).tolist()
     existent_mask_data += res_masks
-    save("mask_data.npy", array(existent_mask_data, dtype="uint8"))
+    save(mask_path, array(existent_mask_data, dtype="uint8"))
 else:
-    save("mask_data.npy", array(res_masks, dtype="uint8"))
+    save(mask_path, array(res_masks, dtype="uint8"))
 
 # Update the ignore file with the processed files' filenames.
 with open("Data\\read_files.txt", "a") as f:

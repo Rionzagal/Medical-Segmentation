@@ -130,3 +130,7 @@ dmypy.json
 
 # Unmovable data
 Data/**
+
+# Ignore the read_files and numpy array files.
+!Data/read_files.txt
+!Data/*.npy
