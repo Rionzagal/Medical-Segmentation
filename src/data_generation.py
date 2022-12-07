@@ -3,29 +3,7 @@ from nibabel import load as nibload
 from numpy import array, max as npmax, min as npmin, ndarray
 
 
-def prepare_data(dir: str) -> list[str]:
-    '''It returns a list of all files in a directory and its subdirectories
-    
-    Parameters
-    ----------
-    dir : str
-        the directory to search for files
-    levels : int, optional
-        The number of levels to go down in the directory tree.
-    
-    Returns
-    -------
-        A list of strings.
-    
-    '''
-    r = list()
-    subdirs = [x[0] for x in walk(dir)]
-    for sub_dir in subdirs:
-        files = walk(sub_dir).__next__()[2]
-        if len(files) > 0:
-            for file in files:
-                r.append(path.join(sub_dir, file))
-    return r
+
 
 def separate_masks(files: list[str], key: str, normalize: bool = False, dtype: str = "float64") -> tuple[ndarray, ndarray]:
     '''It takes a list of files, a key to separate the masks from the images, and a boolean to normalize
